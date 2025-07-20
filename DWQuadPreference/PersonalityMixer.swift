@@ -42,9 +42,14 @@ public struct PersonalityMixer: View {
     
     @State private var isDragging = false
     @State private var localPosition: CGPoint? = nil
+    @State private var wasInCenter = false
+    @State private var hapticFeedback = UIImpactFeedbackGenerator(style: .light)
     
     private let circleSize: CGFloat = 300
     private let knobSize: CGFloat = 40
+    private let centerThreshold: CGFloat = 0.15
+    private let magneticStrength: CGFloat = 0.3
+    private let magneticRadius: CGFloat = 0.25
     
     public init(traits: [PersonalityTrait], mixerPosition: Binding<CGPoint>) {
         self.traits = traits
@@ -241,6 +246,9 @@ public struct PersonalityMixer: View {
                 localPosition = newValue
             }
         }
+        .onAppear {
+            hapticFeedback.prepare()
+        }
     }
     
     private func traitLabel(for trait: PersonalityTrait) -> some View {
@@ -324,10 +332,26 @@ public struct PersonalityMixer: View {
         var relativeY = (location.y - center.y) / (circleSize / 2)
         
         // Constrain to circle
-        let distance = sqrt(relativeX * relativeX + relativeY * relativeY)
+        var distance = sqrt(relativeX * relativeX + relativeY * relativeY)
         if distance > 1 {
             relativeX /= distance
             relativeY /= distance
+            distance = 1
+        }
+        
+        // Apply magnetic pull to center
+        if distance < magneticRadius && distance > 0 {
+            let pullStrength = (1 - distance / magneticRadius) * magneticStrength
+            relativeX *= (1 - pullStrength)
+            relativeY *= (1 - pullStrength)
+            distance = sqrt(relativeX * relativeX + relativeY * relativeY)
+        }
+        
+        // Check for center crossing for haptic feedback
+        let isInCenter = distance < centerThreshold
+        if isInCenter != wasInCenter {
+            hapticFeedback.impactOccurred()
+            wasInCenter = isInCenter
         }
         
         let newPosition = CGPoint(x: relativeX, y: relativeY)
