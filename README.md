@@ -2,6 +2,8 @@
 
 A beautiful, intuitive SwiftUI component for mixing personality traits or any quaternary attributes. Perfect for AI personality configuration, color mixing, or any interface requiring smooth blending between four cardinal options.
 
+[How It Was Made](https://www.dormway.app/why-i-dont-sleep/)
+
 ![PersonalityMixer Demo](screen.gif)
 
 ## Features
