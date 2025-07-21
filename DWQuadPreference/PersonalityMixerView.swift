@@ -32,7 +32,7 @@ public struct PersonalityMixerView: View {
                         Image(systemName: showDetails ? "chevron.up.circle.fill" : "chart.pie.fill")
                     }
                     
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.subheadline.weight(.medium))
                     .foregroundColor(.primary)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)

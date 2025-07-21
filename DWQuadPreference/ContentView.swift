@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import os
 
 struct ContentView: View {
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "PersonalityMixer", category: "ContentView")
     @State private var currentBlend: [(trait: PersonalityTrait, weight: Double)] = []
     
     var body: some View {
@@ -46,10 +48,10 @@ struct ContentView: View {
                 PersonalityMixerView { blend in
                     currentBlend = blend
                     
-                    // Example: Print the current personality blend
-                    print("Personality Blend Updated:")
+                    // Log personality blend updates
+                    logger.debug("Personality blend updated")
                     for item in blend {
-                        print("  \(item.trait.name): \(Int(item.weight * 100))%")
+                        logger.debug("\(item.trait.name): \(Int(item.weight * 100))%")
                     }
                 }
                 

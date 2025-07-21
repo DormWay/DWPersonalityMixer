@@ -242,7 +242,8 @@ public struct PersonalityMixer: View {
                 }
         )
         .onChange(of: mixerPosition) { newValue in
-            if localPosition == nil {
+            // Always sync external changes unless actively dragging
+            if !isDragging {
                 localPosition = newValue
             }
         }
@@ -288,7 +289,7 @@ public struct PersonalityMixer: View {
             
             // SF Symbol icon
             Image(systemName: trait.icon)
-                .font(.system(size: 12, weight: .bold))
+                .font(.caption.weight(.bold))
                 .foregroundColor(.white)
                 .shadow(color: .black.opacity(0.3), radius: 1, x: 0, y: 1)
         }
@@ -501,7 +502,7 @@ struct PersonalityMixerDemo: View {
                 ForEach(traits, id: \.name) { trait in
                     HStack {
                         Image(systemName: trait.icon)
-                            .font(.system(size: 16))
+                            .font(.body)
                             .foregroundColor(trait.color)
                             .frame(width: 24)
                         Text(trait.name)

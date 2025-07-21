@@ -5,6 +5,21 @@ All notable changes to PersonalityMixer will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-01-20
+
+### 🐛 Fixed
+
+- **Crash Prevention** - Fixed force unwrap in PersonalityPieChart that could cause crashes with duplicate trait names (#1)
+- **External Updates** - PersonalityMixer now properly responds to external position updates, enabling programmatic control (#2)
+- **Dynamic Type Support** - Replaced all hardcoded font sizes with semantic styles for better accessibility (#3)
+- **Proper Logging** - Replaced console print statements with os.Logger for production-ready logging (#4)
+
+### 🔧 Improved
+
+- Better two-way binding support for mixer position
+- Enhanced accessibility with Dynamic Type
+- Professional logging practices in examples
+
 ## [1.0.0] - 2025-01-20
 
 ### 🎉 Initial Release

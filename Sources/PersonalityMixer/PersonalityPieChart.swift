@@ -42,12 +42,12 @@ public struct PersonalityPieChart: View {
                 // Center text
                 VStack(spacing: 4) {
                     Text("BLEND")
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .font(.caption.weight(.bold).rounded())
                         .foregroundColor(.secondary)
                     
                     if let dominant = chartData.max(by: { $0.value < $1.value }) {
                         Image(systemName: dominant.trait.icon)
-                            .font(.system(size: 24, weight: .medium))
+                            .font(.title2.weight(.medium))
                             .foregroundColor(dominant.trait.color)
                     }
                 }
@@ -62,18 +62,18 @@ public struct PersonalityPieChart: View {
                             .frame(width: 12, height: 12)
                         
                         Image(systemName: item.trait.icon)
-                            .font(.system(size: 14))
+                            .font(.footnote)
                             .foregroundColor(item.trait.color)
                             .frame(width: 20)
                         
                         Text(item.trait.name)
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.footnote.weight(.medium))
                             .foregroundColor(.primary)
                         
                         Spacer()
                         
-                        Text("\(Int(weights[traits.firstIndex(where: { $0.name == item.trait.name })!] * 100))%")
-                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        Text("\(Int(weights[traits.firstIndex(where: { $0.name == item.trait.name }) ?? 0] * 100))%")
+                            .font(.footnote.weight(.semibold).rounded())
                             .foregroundColor(item.trait.color)
                     }
                 }

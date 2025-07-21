@@ -202,7 +202,8 @@ struct MusicMixerView: View {
     
     func createPlaylist() {
         // Create playlist based on genre blend
-        print("Creating playlist with blend:", genreBlend)
+        // In a real app, use Logger instead of print
+        // logger.info("Creating playlist with blend: \(genreBlend)")
     }
 }
 ```
@@ -260,7 +261,8 @@ struct MoodTrackerView: View {
     
     func saveMood() {
         // Save mood to history
-        print("Saving mood:", currentMood)
+        // In a real app, use Logger instead of print
+        // logger.info("Saving mood: \(currentMood)")
     }
 }
 
